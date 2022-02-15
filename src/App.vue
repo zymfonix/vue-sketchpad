@@ -5,6 +5,7 @@ import {ref} from "vue";
 const pad = ref('pad')
 const color = ref('#000');
 const exportedPad = ref(null);
+const paths = ref([]);
 
 const changeColor = (newColor) => {
   color.value = newColor
@@ -30,7 +31,7 @@ const exportPad = () => {
     <img :src="exportedPad" alt="">
   </div>
   <div class="sketchpad">
-    <Sketchpad ref="pad" :color="color" />
+    <Sketchpad v-model="paths" ref="pad" :color="color" />
   </div>
 </template>
 

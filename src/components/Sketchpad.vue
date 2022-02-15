@@ -6,8 +6,8 @@
       @mousemove="handlePointerMove"
       @mouseup="handlePointerUp"
   >
-    <path :d="pathData" :fill="color" />
     <path v-for="(path, index) in pathsWithData" :key="`path${index}`" :d="path.path" :fill="path.color" />
+    <path :d="pathData" :fill="color" />
   </svg>
 </template>
 
@@ -17,6 +17,8 @@ import Canvg from 'canvg';
 import {getSvgPathFromStroke} from '../utils'
 
 export default {
+  emits: ['update:modelValue'],
+
   props: {
     color: {
       type: String,
@@ -29,13 +31,19 @@ export default {
       default() {
         return {};
       }
+    },
+    modelValue: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
+
   data() {
     return {
       points: [],
       paths: [],
-
     }
   },
 
@@ -121,6 +129,22 @@ export default {
       return canvas.toDataURL();
     },
 
+  },
+
+  watch: {
+    paths: {
+      deep: true,
+      handler(value) {
+        if (value !== this.modelValue) this.$emit('update:modelValue', value)
+      }
+    },
+
+    modelValue: {
+      deep: true,
+      handler(value) {
+        if (value !== this.paths) this.paths = value;
+      }
+    }
   }
 };
 </script>
