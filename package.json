@@ -1,6 +1,7 @@
 {
   "name": "@zymfonix/vue-sketchpad",
   "version": "0.0.1",
+  "main": "src/components/Sketchpad.vue",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
