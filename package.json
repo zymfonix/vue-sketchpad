@@ -1,5 +1,5 @@
 {
-  "name": "@zymfonix/vue-sketchpad",
+  "name": "vue-zketchpad",
   "version": "0.0.1",
   "main": "src/components/Sketchpad.vue",
   "scripts": {
