@@ -30,6 +30,12 @@ export default {
   emits: ['update:modelValue'],
 
   props: {
+    readonly: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
     color: {
       type: String,
       default() {
@@ -122,12 +128,14 @@ export default {
     },
 
     handlePointerDown(e) {
+      if (this.readonly) return;
       this.points = [
         [this.getCanvasX(e), this.getCanvasY(e), e.pressure],
       ];
     },
 
     handlePointerMove(e) {
+      if (this.readonly) return;
       if (e.buttons !== 1) return;
       this.points = [
         ...this.points,
@@ -136,6 +144,7 @@ export default {
     },
 
     handlePointerUp() {
+      if (this.readonly) return;
       const path = JSON.parse(JSON.stringify(this.points));
 
       this.paths.push({
@@ -146,12 +155,14 @@ export default {
     },
 
     handleTouchDown(e) {
+      if (this.readonly) return;
       this.points = [
         [this.getCanvasX(e, 'touch'), this.getCanvasY(e, 'touch'), e.pressure],
       ];
     },
 
     handleTouchMove(e) {
+      if (this.readonly) return;
       this.points = [
         ...this.points,
         [this.getCanvasX(e, 'touch'), this.getCanvasY(e, 'touch'), e.pressure],
@@ -159,6 +170,7 @@ export default {
     },
 
     handleTouchUp() {
+      if (this.readonly) return;
       const path = JSON.parse(JSON.stringify(this.points));
 
       this.paths.push({
@@ -169,6 +181,7 @@ export default {
     },
 
     clear() {
+      if (this.readonly) return;
       this.paths = [];
     },
 
