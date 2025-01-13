@@ -46,7 +46,7 @@ export default {
         cap: true
     },
     end: {
-        taper: 100,
+        taper: 0,
         easing: (t) => t,
         cap: true
     },
